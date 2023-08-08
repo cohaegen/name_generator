@@ -1,8 +1,4 @@
-gpt_name_generator.py:import numpy as np
-main.py:from fastapi import FastAPI
-main.py:from pydantic import BaseModel
-main.py:import tensorflow as tf
-main.py:import numpy as np
-
 tensorflow>=2.12
 numpy==1.24.2
+fastapi~=0.100.0
+pydantic~=2.0.3
