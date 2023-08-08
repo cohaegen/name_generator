@@ -1,6 +1,6 @@
-# name_generator
+# Shakespeare Name Generator
 
-This is a character name generator that uses machine learning trained on The Complete Works of William Shakespeare. It uses a Generative Pre-Trained Transformer (GPT) similar to large language models but on a much smaller scale. The name generator prompts the GPT into thinking it's generating a character name by prompting the GPT with a new line and two spaces, then generating ASCII until it generates a period. This is always how a new character starts speaking in the version of Shakespeare this GPT is trained on.
+This is a character name generator that uses machine learning trained on The Complete Works of William Shakespeare. The names it generates are useful for games, stories, role playing, probably other things. It uses a Generative Pre-Trained Transformer (GPT) similar to large language models but on a much smaller scale. The name generator prompts the GPT into thinking it's generating a character name by prompting the GPT with a new line and two spaces, then generating ASCII until it generates a period. This is always how a new character starts speaking in the version of Shakespeare this GPT is trained on.
 
 ## Quick Start
 
