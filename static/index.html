@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+  }
+  #title {
+    color: white;
+    justify-content: center;
+  }
+  #description {
+    color: white;
+    font-size: 18px;
+    justify-content: center;
+    width: 70%;
+  }
+  #generateButton {
+    background-color: #3498db;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px; /* Rounded border */
+  }
+  #inputContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  #startsWithLabel {
+    color: white;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  #startsWithInput {
+    width: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  #outputBox {
+    margin-top: 20px;
+    width: 300px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 20px; /* Rounded border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+  }
+</style>
+<title>Generate Name</title>
+</head>
+<body>
+  <div id="container">
+    <div id="title">
+      <h1>Shakespeare Name Generator</h1>
+    </div>
+    <div id="description">
+      <p>This is a character name generator that uses machine learning trained on The Complete Works of William Shakespeare.
+      You can use it to generate names for games, stories, role playing, whatever else you can think of. The character names
+      are definitely inspired by Shakespeare, but they're often completely new names.
+      </p>
+      <p>
+        If you want your character's name to start with something in particular, you can enter that in the prompt. If you leave
+        the prompt blank, it will generate a totally random name.
+      </p>
+      <p>
+      How does it work? It uses a Generative Pre-Trained Transformer (GPT) similar to large language models but on a much
+      smaller scale. The name generator prompts the GPT into thinking it's generating
+      a character name by prompting the GPT with a new line and two spaces, then generating characters until it sees a period.
+      This is always how a new character starts speaking in the version of Shakespeare this GPT is trained on.
+      </p>
+    </div>
+    <div id="inputContainer">
+      <label id="startsWithLabel" for="startsWithInput">Starts with:</label>
+      <input type="text" id="startsWithInput">
+      <button id="generateButton">Generate Name</button>
+    </div>
+    <div id="outputBox">Generated Name</div>
+  </div>
+  <script>
+    const generateButton = document.getElementById('generateButton');
+    const outputBox = document.getElementById('outputBox');
+    const startsWithInput = document.getElementById('startsWithInput');
+
+    generateButton.addEventListener('click', async () => {
+      try {
+        const startsWith = startsWithInput.value;
+        const requestData = { starts_with: startsWith };
+        const response = await fetch('/name', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestData)
+        });
+        const data = await response.json();
+        outputBox.textContent = data.name; // Assuming the API response contains a "name" property
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        outputBox.textContent = 'Error fetching name';
+      }
+    });
+  </script>
+</body>
+</html>
